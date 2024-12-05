@@ -41,10 +41,10 @@ async def cmd_hello(message: Message, state: FSMContext):
     # Приветственное сообщение
     await state.clear()
     await message.answer(
-        f"Привет, {(message.from_user.full_name)}!\n Я готов помочь тебе с добавлением задач и дел в Google Calendar!\n"
+        f"Привет, {(message.from_user.full_name)}!\nЯ готов помочь тебе с добавлением задач и дел в Google Calendar!\n"
     )
     keyboard = ReplyKeyboardMarkup(
-        keyboard=[[KeyboardButton(text="/set_timezone")]],
+        keyboard=[[KeyboardButton(text="Установить часовой пояс")]],
         resize_keyboard=True,
         one_time_keyboard=True,
     )
@@ -86,6 +86,7 @@ timezones = {
 
 
 # Обработчик команды для запроса часового пояса
+@command_router.message(F.text.lower().contains("установить часовой пояс"))
 @command_router.message(Command("set_timezone"))
 async def set_timezone(message: types.Message, state: FSMContext):
     keyboard = []
